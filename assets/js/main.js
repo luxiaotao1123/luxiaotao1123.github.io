@@ -12,9 +12,9 @@ window.addEventListener('scroll', scrollHeader)
 let swiperPopular = new Swiper(".popular__container", {
     spaceBetween: 32,
     grabCursor: true,
-    centeredSlides: true,
+    centeredSlides: false,
     slidesPerView: 'auto',
-    loop: true,
+    loop: false,
 
     navigation: {
         nextEl: ".swiper-button-next",
@@ -27,14 +27,19 @@ const popularCards = document.querySelectorAll('.popular__card');
 
 popularCards.forEach((card, index) => {
     card.addEventListener('click', () => {
-        const htmlContent = `
-          <h2 style="margin-bottom: 0.5rem;">Hello</h2>
-          <p style="margin-bottom: 1rem;">Description</p>
+        const mediaSrc = card.dataset.media;
 
+        const htmlContent = `
+            <h2 style="margin-bottom: 0.5rem;">Hello</h2>
+            <p style="margin-bottom: 1rem;">Description</p>
+            <video id="plyr-video-${index}" playsinline controls style="width:100%; height:auto;">
+                <source src="${mediaSrc}" type="video/mp4">
+                Your browser does not support the HTML5 video tag.
+            </video>   
         `;
 
         Swal.fire({
-            title: '播放视频',
+            title: 'media', 
             showClass: {
                 popup: `
                   animate__animated
@@ -49,13 +54,14 @@ popularCards.forEach((card, index) => {
                   animate__faster
                 `
             },
-            html: htmlContent,        // 用自定义 HTML 来显示文本和视频
-            showConfirmButton: false, // 是否显示“确认”按钮
+            html: htmlContent,
+            showConfirmButton: false,
             scrollbarPadding: false,
-            width: '60rem',          // 弹窗宽度，可根据需要自由调整
-            // 弹窗内容插入 DOM 后执行
+            width: '60rem',
             didOpen: () => {
-                // 5. 初始化 Plyr
+                const player = new Plyr(`#plyr-video-${index}`, {
+                    volume: 0.5
+                });
             }
         });
     });
