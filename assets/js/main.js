@@ -27,9 +27,11 @@ const popularCards = document.querySelectorAll('.popular__card');
 
 popularCards.forEach((card, index) => {
     card.addEventListener('click', () => {
+        const type = card.dataset.type;
         const mediaSrc = card.dataset.media;
 
-        const htmlContent = `
+        if (type === 'video') {
+            const htmlContent = `
             <h2 style="margin-bottom: 0.5rem;">Hello</h2>
             <p style="margin-bottom: 1rem;">Description</p>
             <video id="plyr-video-${index}" playsinline controls style="width:100%; height:auto;">
@@ -37,33 +39,85 @@ popularCards.forEach((card, index) => {
                 Your browser does not support the HTML5 video tag.
             </video>   
         `;
+            Swal.fire({
+                title: 'media',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInUp animate__faster'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutDown animate__faster'
+                },
+                html: htmlContent,
+                showConfirmButton: false,
+                scrollbarPadding: false,
+                width: '60rem',
+                didOpen: () => {
+                    const player = new Plyr(`#plyr-video-${index}`, {
+                        volume: 0.5
+                    });
+                }
+            });
+        } else if (type === 'image') {
+            const imagePaths = mediaSrc.split(',');
 
-        Swal.fire({
-            title: 'media', 
-            showClass: {
-                popup: `
-                  animate__animated
-                  animate__fadeInUp
-                  animate__faster
-                `
-            },
-            hideClass: {
-                popup: `
-                  animate__animated
-                  animate__fadeOutDown
-                  animate__faster
-                `
-            },
-            html: htmlContent,
-            showConfirmButton: false,
-            scrollbarPadding: false,
-            width: '60rem',
-            didOpen: () => {
-                const player = new Plyr(`#plyr-video-${index}`, {
-                    volume: 0.5
-                });
-            }
-        });
+            let slidesHtml = '';
+            imagePaths.forEach((imgSrc) => {
+                slidesHtml += `
+                  <div class="swiper-slide">
+                    <img src="${imgSrc.trim()}" alt="Image Slide" style="width:100%; height:auto;">
+                  </div>
+                `;
+            });
+
+            const htmlContent = `
+                <h2 style="margin-bottom: 0.5rem;">Image Gallery</h2>
+                <p style="margin-bottom: 1rem;">Description for images</p>
+                
+                <div class="swiper mySwiper" style="width:100%;height:auto;">
+                <div class="swiper-wrapper">
+                    ${slidesHtml}
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next" style="color: #333; z-index: 99;"></div>
+                <div class="swiper-button-prev" style="color: #333; z-index: 99;"></div>
+                </div>
+            `;
+            Swal.fire({
+                title: 'Images',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInUp animate__faster'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutDown animate__faster'
+                },
+                html: htmlContent,
+                showConfirmButton: false,
+                scrollbarPadding: false,
+                width: '60rem',
+                didOpen: () => {
+                    // 在弹窗内容插入到 DOM 后初始化内部 Swiper
+                    new Swiper('.mySwiper', {
+                        loop: true,
+                        spaceBetween: 10,
+                        navigation: {
+                            nextEl: '.swiper-button-next',
+                            prevEl: '.swiper-button-prev',
+                        },
+                        pagination: {
+                            el: '.swiper-pagination',
+                            clickable: true,
+                        }
+                    });
+                }
+            });
+        } else {
+            Swal.fire({
+                icon: 'info',
+                title: 'No media found',
+                text: 'This card does not have video or images.'
+            });
+        }
+
     });
 })
 

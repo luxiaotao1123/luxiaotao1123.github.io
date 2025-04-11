@@ -921,10 +921,6 @@ body.dark-theme {
     height: 264px;
   }
 
-  .logos__container {
-    gap: 2rem 1rem;
-  }
-
   .popular__card {
     width: 230px;
     padding: .5rem .5rem .75rem;
@@ -952,7 +948,7 @@ body.dark-theme {
 
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 400px) {
   .container {
     margin-left: 1rem;
     margin-right: 1rem;
@@ -964,6 +960,10 @@ body.dark-theme {
 
   .home {
     padding-bottom: 0;
+  }
+
+  .logos__container {
+    gap: 2rem 0rem;
   }
 
   .contact__car {
