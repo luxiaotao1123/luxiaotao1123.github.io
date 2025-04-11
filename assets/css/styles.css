@@ -1178,6 +1178,7 @@ body.dark-theme {
   }
 
   .popular__card {
+    cursor: pointer;
     width: 320px;
     padding: .75rem .75rem 2rem;
   }
