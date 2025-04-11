@@ -38,6 +38,10 @@
   /*========== z index ==========*/
   --z-tooltip: 10;
   --z-fixed: 100;
+
+  /*========== override swal2 ==========*/
+  --swal2-background: var(--container-color);
+  --swal2-color: var(--text-color);
 }
 
 /* Responsive typography */
@@ -177,6 +181,11 @@ body.dark-theme {
   background-color: hsl(228, 4%, 35%);
 }
 
+/*========== override swal2 ==========*/
+.dark-theme {
+  --swal2-background: var(--container-color);
+  --swal2-color: var(--text-color);
+}
 
 /*=============== REUSABLE CSS CLASSES ===============*/
 .container {
@@ -528,6 +537,35 @@ body.dark-theme {
 .swiper-button-next {
   right: calc(50% - 3rem);
 }
+
+.projectSwiper {
+  position: relative;
+}
+
+.projectSwiper .swiper-button-next,
+.projectSwiper .swiper-button-prev {
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: #fff;
+  background: transparent;
+  border: 2px solid var(--text-color-light);
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.projectSwiper .swiper-button-next {
+  right: 10px;
+}
+
+.projectSwiper .swiper-button-prev {
+  left: 10px;
+}
+
+
 
 /*=============== VALUE ===============*/
 .value__container {

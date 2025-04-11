@@ -32,15 +32,15 @@ popularCards.forEach((card, index) => {
 
         if (type === 'video') {
             const htmlContent = `
-            <h2 style="margin-bottom: 0.5rem;">Hello</h2>
-            <p style="margin-bottom: 1rem;">Description</p>
-            <video id="plyr-video-${index}" playsinline controls style="width:100%; height:auto;">
-                <source src="${mediaSrc}" type="video/mp4">
-                Your browser does not support the HTML5 video tag.
-            </video>   
-        `;
+                <h2 style="margin-bottom: 0.5rem;">Hello</h2>
+                <p style="margin-bottom: 1rem;">Description</p>
+                <video id="plyr-video-${index}" playsinline controls style="width:100%; height:auto;">
+                    <source src="${mediaSrc}" type="video/mp4">
+                    Your browser does not support the HTML5 video tag.
+                </video>   
+            `;
             Swal.fire({
-                title: 'media',
+                // title: 'media',
                 showClass: {
                     popup: 'animate__animated animate__fadeInUp animate__faster'
                 },
@@ -73,17 +73,17 @@ popularCards.forEach((card, index) => {
                 <h2 style="margin-bottom: 0.5rem;">Image Gallery</h2>
                 <p style="margin-bottom: 1rem;">Description for images</p>
                 
-                <div class="swiper mySwiper" style="width:100%;height:auto;">
-                <div class="swiper-wrapper">
-                    ${slidesHtml}
-                </div>
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-next" style="color: #333; z-index: 99;"></div>
-                <div class="swiper-button-prev" style="color: #333; z-index: 99;"></div>
+                <div class="swiper projectSwiper">
+                    <div class="swiper-wrapper">
+                        ${slidesHtml}
+                    </div>
+                    <div class="swiper-button-next"><i class='bx bx-chevron-right'></i></div>
+                    <div class="swiper-button-prev"><i class='bx bx-chevron-left'></i></div>
+                    <div class="swiper-pagination"></div>
                 </div>
             `;
             Swal.fire({
-                title: 'Images',
+                // title: 'Images',
                 showClass: {
                     popup: 'animate__animated animate__fadeInUp animate__faster'
                 },
@@ -95,17 +95,14 @@ popularCards.forEach((card, index) => {
                 scrollbarPadding: false,
                 width: '60rem',
                 didOpen: () => {
-                    // 在弹窗内容插入到 DOM 后初始化内部 Swiper
-                    new Swiper('.mySwiper', {
-                        loop: true,
-                        spaceBetween: 10,
+                    new Swiper('.projectSwiper', {
                         navigation: {
                             nextEl: '.swiper-button-next',
                             prevEl: '.swiper-button-prev',
                         },
                         pagination: {
                             el: '.swiper-pagination',
-                            clickable: true,
+                            type: "progressbar",
                         }
                     });
                 }
