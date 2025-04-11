@@ -1,10 +1,10 @@
 // https://www.bilibili.com/video/BV1KL4y1c7FQ?spm_id_from=333.337.search-card.all.click
 
 /*=============== CHANGE BACKGROUND HEADER ===============*/
-function scrollHeader(){
+function scrollHeader() {
     const header = document.getElementById('header')
     // When the scroll is greater than 50 viewport height, add the scroll-header class to the header tag
-    if(this.scrollY >= 50) header.classList.add('scroll-header'); else header.classList.remove('scroll-header')
+    if (this.scrollY >= 50) header.classList.add('scroll-header'); else header.classList.remove('scroll-header')
 }
 window.addEventListener('scroll', scrollHeader)
 
@@ -22,13 +22,52 @@ let swiperPopular = new Swiper(".popular__container", {
     },
 });
 
+/*=============== SWEET ALERT 2 ===============*/
+const popularCards = document.querySelectorAll('.popular__card');
+
+popularCards.forEach((card, index) => {
+    card.addEventListener('click', () => {
+        const htmlContent = `
+          <h2 style="margin-bottom: 0.5rem;">Hello</h2>
+          <p style="margin-bottom: 1rem;">Description</p>
+
+        `;
+
+        Swal.fire({
+            title: '播放视频',
+            showClass: {
+                popup: `
+                  animate__animated
+                  animate__fadeInUp
+                  animate__faster
+                `
+            },
+            hideClass: {
+                popup: `
+                  animate__animated
+                  animate__fadeOutDown
+                  animate__faster
+                `
+            },
+            html: htmlContent,        // 用自定义 HTML 来显示文本和视频
+            showConfirmButton: false, // 是否显示“确认”按钮
+            scrollbarPadding: false,
+            width: '60rem',          // 弹窗宽度，可根据需要自由调整
+            // 弹窗内容插入 DOM 后执行
+            didOpen: () => {
+                // 5. 初始化 Plyr
+            }
+        });
+    });
+})
+
 /*=============== VALUE ACCORDION ===============*/
 const accordionItems = document.querySelectorAll('.value__accordion-item')
 
-accordionItems.forEach((item)=> {
+accordionItems.forEach((item) => {
     const accordionHeader = item.querySelector('.value__accordion-header')
 
-    accordionHeader.addEventListener('click', ()=> {
+    accordionHeader.addEventListener('click', () => {
         const openItem = document.querySelector('.accordion-open')
 
         toggleItem(item)
@@ -55,17 +94,17 @@ const toggleItem = (item) => {
 /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
 const sections = document.querySelectorAll('section[id]')
 
-function scrollActive(){
+function scrollActive() {
     const scrollY = window.pageYOffset
 
-    sections.forEach(current =>{
+    sections.forEach(current => {
         const sectionHeight = current.offsetHeight,
             sectionTop = current.offsetTop - 58,
             sectionId = current.getAttribute('id')
 
-        if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
             document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active-link')
-        }else{
+        } else {
             document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.remove('active-link')
         }
     })
@@ -73,10 +112,10 @@ function scrollActive(){
 window.addEventListener('scroll', scrollActive)
 
 /*=============== SHOW SCROLL UP ===============*/
-function scrollUp(){
+function scrollUp() {
     const scrollUp = document.getElementById('scroll-up');
     // When the scroll is higher than 350 viewport height, add the show-scroll class to the a tag with the scroll-top class
-    if(this.scrollY >= 350) scrollUp.classList.add('show-scroll'); else scrollUp.classList.remove('show-scroll')
+    if (this.scrollY >= 350) scrollUp.classList.add('show-scroll'); else scrollUp.classList.remove('show-scroll')
 }
 window.addEventListener('scroll', scrollUp)
 
@@ -120,10 +159,10 @@ const sr = ScrollReveal({
 })
 
 sr.reveal('.home__title, .popular__container, subscribe__container, .footer__container')
-sr.reveal('.home__description, .footer__info', {delay: 500})
-sr.reveal('.home__search', {delay: 600})
-sr.reveal('.home__value', {delay: 700})
-sr.reveal('.home__images', {delay: 800, origin: 'bottom'})
-sr.reveal('.logos__img', {interval: 100})
-sr.reveal('.value__images, .contact__content', {origin: 'left'})
-sr.reveal('.value__content, .contact__images', {origin: 'right'})
+sr.reveal('.home__description, .footer__info', { delay: 500 })
+sr.reveal('.home__search', { delay: 600 })
+sr.reveal('.home__value', { delay: 700 })
+sr.reveal('.home__images', { delay: 800, origin: 'bottom' })
+sr.reveal('.logos__img', { interval: 100 })
+sr.reveal('.value__images, .contact__content', { origin: 'left' })
+sr.reveal('.value__content, .contact__images', { origin: 'right' })
