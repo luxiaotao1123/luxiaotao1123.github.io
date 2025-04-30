@@ -515,6 +515,19 @@ body.dark-theme {
   padding: 0.8em 0.5em 0em;
 }
 
+.swal-video-content {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0.5rem;
+}
+
+.swal-video-content {
+  margin-bottom: 1rem;
+}
+
 /* Swiper class */
 .swiper-button-next::after,
 .swiper-button-prev::after {
@@ -1080,6 +1093,14 @@ body.dark-theme {
   .footer__container {
     grid-template-columns: repeat(2, max-content);
     justify-content: space-between;
+  }
+
+  .swal-video-content {
+    display: block;
+    overflow: visible;
+    text-overflow: clip;
+    -webkit-line-clamp: initial;
+    -webkit-box-orient: initial;
   }
 
 }

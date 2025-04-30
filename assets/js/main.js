@@ -29,12 +29,14 @@ popularCards.forEach((card, index) => {
     card.addEventListener('click', () => {
         const type = card.dataset.type;
         const mediaSrc = card.dataset.media;
+        const title = card.dataset.title;
+        const content = card.dataset.content;
 
         if (type === 'video') {
             const htmlContent = `
-                <h2 style="margin-bottom: 0.5rem;">Hello</h2>
-                <p style="margin-bottom: 1rem;">Description</p>
-                <video id="plyr-video-${index}" playsinline controls style="width:100%; height:auto;">
+                <h2 class="swal-video-title">${title}</h2>
+                <p class="swal-video-content">${content}</p>
+                <video id="plyr-video-${index}" class="swal-video" playsinline controls>
                     <source src="${mediaSrc}" type="video/mp4">
                     Your browser does not support the HTML5 video tag.
                 </video>   
@@ -70,8 +72,8 @@ popularCards.forEach((card, index) => {
             });
 
             const htmlContent = `
-                <h2 style="margin-bottom: 0.5rem;">Image Gallery</h2>
-                <p style="margin-bottom: 1rem;">Description for images</p>
+                <h2 class="swal-video-title">${title}</h2>
+                <p class="swal-video-content">${content}</p>
                 
                 <div class="swiper projectSwiper">
                     <div class="swiper-wrapper">
