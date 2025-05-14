@@ -745,9 +745,8 @@ body.dark-theme {
 .contact__card-info {
   display: flex;
   align-items: center;
-  column-gap: .75rem;
-  /* margin-bottom: 1.25rem; */
-  justify-content: space-around;
+  column-gap: 1.25rem;
+  justify-content: flex-start;
 }
 
 .contact__card i {
