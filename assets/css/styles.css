@@ -1046,6 +1046,7 @@ body.dark-theme {
   .contact__card {
     grid-template-columns: repeat(2, 192px);
     justify-content: center;
+    gap: 1.05rem .75rem;
   }
 
   .footer__content {
